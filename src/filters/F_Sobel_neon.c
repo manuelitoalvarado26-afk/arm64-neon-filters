@@ -20,7 +20,7 @@ void Aplicar_sobel_neon(const uint8_t *src, uint8_t *dst, int width, int height)
             //Cargando 8 pixeles a izquierda y derecha 
             //Fila Arriba
             uint8x8_t top_left = vld1_u8 (row_top + x - 1);
-            uint8x8_t top_right = vld1_u8 (row_top + x +1);
+            uint8x8_t top_right = vld1_u8 (row_top + x + 1);
 
             //Fila Medio
             uint8x8_t mid_left = vld1_u8 (row_mid + x - 1);

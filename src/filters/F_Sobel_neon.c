@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <arm_neon.h>
 
-void Aplicar_sobel_neon(const uint8_t *src, uint8_t *dst, int width, int height) {
+void Sobel_neon(const uint8_t *src, uint8_t *dst, int width, int height) {
 
     //Recorriendo filas verticales y (evitando horizontales)
     for (int y = 1; y < height -1 ; y++) {

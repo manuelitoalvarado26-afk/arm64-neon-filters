@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <arm_neon.h>
 
-void Tono_sepia_neon (uint8_t *datos ,int ancho, int alto, int canales) {
+void Sepia_neon (uint8_t *datos ,int ancho, int alto, int canales) {
 
 
 //Duplicacion por 4 veces de todos los canales 

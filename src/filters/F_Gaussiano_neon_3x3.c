@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <arm_neon.h>
 
-void Aplicar_Gaussiano_3x3_RGB_neon (const uint8_t *src, uint8_t *dst, int width, int height) {
+void Gaussiano_3x3_RGB_neon (const uint8_t *src, uint8_t *dst, int width, int height) {
 
     //Recorremos verticalmente evitando los bordees (y = 1 hasta height - 1)
     for (int y = 1; y < height - 1; y++) {

@@ -2,8 +2,7 @@
 #include <stddef.h>
 #include <arm_neon.h>
 
-void Gaussiano_horizontal_RGB_neon (const uint8_t *src, uint8_t *dst, int width, int height) {
-    size_t stride = (size_t)stride;
+void Gaussiano_horizontal_RGB_neon (const uint8_t *src, uint8_t *dst, int width, int height, size_t stride) {
 
     //Recorrido y caculo de filas
     for (int y = 0; y < height; y++) {

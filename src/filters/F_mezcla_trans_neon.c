@@ -8,7 +8,7 @@ typedef struct
   uint8_t a;
 }PixelRGBA;
 
-void Mezclar_ImagenesC(const PixelRGBA* imgA, const PixelRGBA* imgB, PixelRGBA* imgDest, size_t numPixeles ) {
+void Mezcla_trans(const PixelRGBA* imgA, const PixelRGBA* imgB, PixelRGBA* imgDest, size_t numPixeles ) {
 
     for (size_t i = 0; i < numPixeles; i+=4 ) {
     

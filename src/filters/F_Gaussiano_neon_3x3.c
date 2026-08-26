@@ -12,24 +12,24 @@ void Gaussiano_3x3_RGB_neon (const uint8_t *src, uint8_t *dst, int width, int he
             //Offsets en BYTES para fila superior, central e inferior 
             //Multiplicamos x * 3 (RGB)
             size_t stride = width * 3;
-            const uint8_t *off_top = &src[(y - 1) * stride + (x * 3)];
-            const uint8_t *off_mid = &src[y * stride + (x * 3)];
-            const uint8_t *off_bot = &src[(y + 1) * stride + (x * 3)];
+            size_t off_top = (y - 1) * stride + (x * 3);
+            size_t off_mid = y * stride + (x * 3);
+            size_t off_bot = (y + 1) * stride + (x * 3);
 
             //Fila superior (top)
-            uint8x8x3_t f0_left = vld3_u8 (off_top - 3);
-            uint8x8x3_t f0_mid = vld3_u8 (off_top);
-            uint8x8x3_t f0_right = vld3_u8 (off_top + 3);
+            uint8x8x3_t f0_left = vld3_u8 (&src[off_top - 3]);
+            uint8x8x3_t f0_mid = vld3_u8 (&src[off_top]);
+            uint8x8x3_t f0_right = vld3_u8 (&src[off_top + 3]);
 
             //Fila central (mid)
-            uint8x8x3_t f1_left = vld3_u8 (off_mid - 3);
-            uint8x8x3_t f1_mid = vld3_u8 (off_mid);
-            uint8x8x3_t f1_right = vld3_u8 (off_mid + 3);
+            uint8x8x3_t f1_left = vld3_u8 (&src[off_mid - 3]);
+            uint8x8x3_t f1_mid = vld3_u8 (&src[off_mid]);
+            uint8x8x3_t f1_right = vld3_u8 (&src[off_mid + 3]);
 
             //Fila inferior (bot)
-            uint8x8x3_t f2_left = vld3_u8 (off_bot - 3);
-            uint8x8x3_t f2_mid = vld3_u8 (off_bot);
-            uint8x8x3_t f2_right = vld3_u8 (off_bot + 3);
+            uint8x8x3_t f2_left = vld3_u8 (&src[off_bot - 3]);
+            uint8x8x3_t f2_mid = vld3_u8 (&src[off_bot]);
+            uint8x8x3_t f2_right = vld3_u8 (&src[off_bot + 3]);
 
             //Variable de almasenamiento para los 3 canales
             uint8x8x3_t res_rgb;
@@ -64,9 +64,7 @@ void Gaussiano_3x3_RGB_neon (const uint8_t *src, uint8_t *dst, int width, int he
             }
 
                 //Regresando los 8 pixeles procesados en la imagen de destino (dts)
-                //Calculando la dierrcion base del destino (dst)
-                uint8_t *dst_ptr = &dst[y * stride + (x * 3)];
-                vst3_u8 (dst_ptr,res_rgb);
+                vst3_u8 (&dst[off_mid], res_rgb);
         }
     }
 }

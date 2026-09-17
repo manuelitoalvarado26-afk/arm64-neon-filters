@@ -1,19 +1,15 @@
-#include "filters/Binarizer_Filter.hpp"
+#include "static/Binarizer_static.hpp"
 #include <arm_neon.h>
 
 namespace core {
 
-    //Constructor: Asigna el umbral a la variable privada trheshold_
-    BinarizeFilter::BinarizeFilter (uint8_t threshold)
-    : threshold_(threshold) {}
-
     //Método process: Matemática NEON
-    void BinarizeFilter::process (const uint8_t* src, uint8_t* dst, std::size_t total_pixels) {
+    void BinarizeStatic::process (const uint8_t* src, uint8_t* dst, std::size_t total_pixels, uint8_t threshold) {
         std::size_t i = 0;
 
         //Clonar el umbral privado privado a un registro de 128 bits (16 bytes)
-        uint8x16_t vec_threshold = vdupq_n_u8 (threshold_);
-
+        uint8x16_t vec_threshold = vdupq_n_u8 (threshold);
+        
         //Bucle principal: procesar 16 pixeles por ciclo de reloj 
         for (; i + 16 <= total_pixels; i += 16) {
             uint8x16_t pixels = vld1q_u8 (src + i);
@@ -25,7 +21,7 @@ namespace core {
 
         //Bucle escalar para limpiar los pixeles sobrantes
         for (; i < total_pixels; ++i) {
-            dst[i] = (src[i] > threshold_) ? 255 : 0;
+            dst[i] = (src[i] > threshold) ? 255 : 0;
         }
     }
 }

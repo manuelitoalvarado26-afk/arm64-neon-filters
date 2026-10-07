@@ -5,7 +5,8 @@
 namespace core {
 
     void GrayscalerStatic::process (const uint8_t* src, uint8_t* dst, std::size_t total_pixels) {
-
+        if (!src || !dst || total_pixels == 0) return;
+        
         //Declaracion de variables
         std::size_t total_bytes = total_pixels * 3;
         std::size_t i = 0;

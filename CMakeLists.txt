@@ -19,6 +19,10 @@ add_compile_options(-Wall -Wextra -O3 -mcpu=native)
 set(PROJECT_SOURCES
    src/color/Gray_neon.cpp
    src/color/Binarization_neon.cpp
+   src/color/Sepia_neon.cpp
+   src/edges/Sobel_neon.cpp
+   src/io/ppm_image.cpp
+   src/io/pgm_image.cpp
    )
 
 # 7. Creamos el ejecutable uniendo el main y los módulos de procesamiento
